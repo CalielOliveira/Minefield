@@ -22,13 +22,13 @@ def hard_mode():
 
 
 def restart_game():
-    global matriz_of_squares, list_of_squares
+    global matrix_of_squares, list_of_squares
     for row in list_of_squares:
         for square in row:
             square.destroy()
-    matriz_of_squares = create_camp(n, m, k)
+    matrix_of_squares = create_camp(n, m, k)
     create_buttons()
-    for line in matriz_of_squares:
+    for line in matrix_of_squares:
         print(line)
 
 
@@ -44,14 +44,14 @@ def create_buttons():
 
 
 def create_camp(n, m, k):
-    matriz = [[0 for i in range(m)] for j in range(n)]
+    matrix = [[0 for i in range(m)] for j in range(n)]
     bombs = 0
     while bombs < k:
         place = [random.randint(1, n - 1), random.randint(1, m - 1)]
-        if matriz[place[0]][place[1]] != 1:
-            matriz[place[0]][place[1]] = 1
+        if matrix[place[0]][place[1]] != 1:
+            matrix[place[0]][place[1]] = 1
             bombs += 1
-    return matriz
+    return matrix
 
 
 def check_disponible_places(x, y):
@@ -72,14 +72,14 @@ def count_bombs_around(n, m, disponible_places):
     counter = 0
     for i in range(disponible_places[0], disponible_places[1]):
         for j in range(disponible_places[2], disponible_places[3]):
-            if matriz_of_squares[n + i][m + j] == 1:
+            if matrix_of_squares[n + i][m + j] == 1:
                 counter += 1
     return counter
 
 
 def reveal(x, y):
     global list_of_squares
-    if matriz_of_squares[x][y] == 1:
+    if matrix_of_squares[x][y] == 1:
         tkinter.messagebox.showinfo("Alert!", "Você clickou em uma bomba e ela explodiu!")
         restart_game()
     else:
@@ -92,7 +92,7 @@ def reveal(x, y):
                 for b in range(disponible_places[2], disponible_places[3]):
                     i = x + a
                     j = y + b
-                    if type(list_of_squares[i][j]) == tkinter.Button and matriz_of_squares[i][j] != 1:
+                    if type(list_of_squares[i][j]) == tkinter.Button and matrix_of_squares[i][j] != 1:
                         reveal(i, j)
         else:
             list_of_squares[x][y].destroy()
@@ -110,8 +110,8 @@ def put_mark(event):
 n = 8
 m = 8
 k = 10
-matriz_of_squares = create_camp(n, m, k)
-for line in matriz_of_squares:
+matrix_of_squares = create_camp(n, m, k)
+for line in matrix_of_squares:
     print(line)
 
 window = tkinter.Tk()
