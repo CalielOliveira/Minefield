@@ -107,9 +107,7 @@ def put_mark(event):
         event.widget['text'] = 'X'
 
 
-n = 8
-m = 8
-k = 10
+n, m, k = 8, 8, 10
 matrix_of_squares = create_camp(n, m, k)
 for line in matrix_of_squares:
     print(line)
